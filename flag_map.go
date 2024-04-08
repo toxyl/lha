@@ -40,7 +40,7 @@ func (fm *FlagMap) Add(name string, target, def interface{}, desc string) *FlagM
 func (fm *FlagMap) AddOptions(name string, target *string, options []string, def string, desc string) *FlagMap {
 	fm.checkForDuplicateFlag(name)
 	desc += "\n"
-	desc += "Options: " + strings.Join(options, ", ") + "\n"
+	desc += "Options: " + strings.Join(options, ", ")
 
 	fm.data[name] = flag.String(name, def, desc)
 	fm.targets[name] = target
