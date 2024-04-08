@@ -4,7 +4,10 @@ import (
 	"flag"
 	"fmt"
 	"os"
+	"path/filepath"
 	"strings"
+
+	"github.com/toxyl/glog"
 )
 
 type FlagMap struct {
@@ -87,7 +90,8 @@ func (fm *FlagMap) UnsetArg(name string) interface{} {
 }
 
 func (fm *FlagMap) Help() {
-	fmt.Println()
+	fmt.Printf("%s\nUsage:   %s <flags> <paths>\n", glog.Bold()+"Command"+glog.Reset(), filepath.Base(os.Args[0]))
+	fmt.Printf("Example: %s --sort time /tmp /home\n\n%s\n", filepath.Base(os.Args[0]), glog.Bold()+"Flags"+glog.Reset())
 	flag.Usage()
 	fmt.Println()
 	os.Exit(0)
