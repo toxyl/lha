@@ -36,7 +36,14 @@ func main() {
 	var sortBy string
 	fm := NewFlagMap().
 		Add("monochrome", &monochrome, false, "Prints monochrome output").
-		AddOptions("sort", &sortBy, []string{SORT_NAME, SORT_NAME_DESC, SORT_PERM, SORT_PERM_DESC, SORT_USER, SORT_USER_DESC, SORT_GROUP, SORT_GROUP_DESC, SORT_SIZE, SORT_SIZE_DESC, SORT_TIME, SORT_TIME_DESC}, SORT_NAME, "Defines how to sort the output").
+		AddOptions("sort", &sortBy, []string{
+			SORT_NAME, SORT_NAME_DESC,
+			SORT_PERM, SORT_PERM_DESC,
+			SORT_USER, SORT_USER_DESC,
+			SORT_GROUP, SORT_GROUP_DESC,
+			SORT_SIZE, SORT_SIZE_DESC,
+			SORT_TIME, SORT_TIME_DESC,
+		}, SORT_NAME, "Defines how to sort the output").
 		Add("help", &showHelp, false, "Prints the help").
 		Scan([]string{})
 	if showHelp {
@@ -53,7 +60,6 @@ func main() {
 		pathAbs, maxLenUID, maxLenGID, totalSize, directories, files := getContents(path)
 
 		if sortBy != SORT_NAME {
-			// let's sort
 			sort.Slice(directories, func(i, j int) bool {
 				d1 := directories[i]
 				d2 := directories[j]

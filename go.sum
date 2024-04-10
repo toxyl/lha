@@ -2,6 +2,8 @@ github.com/toxyl/flo v0.0.0-20240408193025-9090db2d75aa h1:kCD67RqPzGNWNJgEnIFx2
 github.com/toxyl/flo v0.0.0-20240408193025-9090db2d75aa/go.mod h1:6Qcwel2+Y+idH3E6C7f8RYjmOVgKvbiwewRkcnspKgo=
 github.com/toxyl/flo v0.0.0-20240408195104-afac74268dc0 h1:WyuWFWLXTfAmCAdlUgAxXGZPY8c9V0OLfP/kJ3lCD4c=
 github.com/toxyl/flo v0.0.0-20240408195104-afac74268dc0/go.mod h1:6Qcwel2+Y+idH3E6C7f8RYjmOVgKvbiwewRkcnspKgo=
+github.com/toxyl/flo v0.0.0-20240409093221-60e249aecb59 h1:VArdgr5Efrv5ULI1Yb67SbpR4nvn8zJwCQWVQ5Kx6bE=
+github.com/toxyl/flo v0.0.0-20240409093221-60e249aecb59/go.mod h1:6Qcwel2+Y+idH3E6C7f8RYjmOVgKvbiwewRkcnspKgo=
 github.com/toxyl/glog v1.0.0-alpha.15 h1:cc7jRcEk/NKtjW1KQsXHws1v9PTgMW457HZmEVrhE64=
 github.com/toxyl/glog v1.0.0-alpha.15/go.mod h1:3EMPMP5wXep81eUXWfX2vLdr4zRxkMfCcHnGHciblMc=
 gopkg.in/check.v1 v0.0.0-20161208181325-20d25e280405 h1:yhCVgyC4o1eVCa2tZl7eS0r+SDo693bJlVdllGtEeKM=
