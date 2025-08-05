@@ -6,6 +6,8 @@ import (
 	"sort"
 	"strings"
 
+	_ "github.com/toxyl/termux-launch-fix"
+
 	"github.com/toxyl/flo/config"
 	"github.com/toxyl/flo/log"
 	"github.com/toxyl/flo/utils"
@@ -43,20 +45,21 @@ func main() {
 			SORT_GROUP, SORT_GROUP_DESC,
 			SORT_SIZE, SORT_SIZE_DESC,
 			SORT_TIME, SORT_TIME_DESC,
-		}, SORT_NAME, "Defines how to sort the output").
+		}, SORT_NAME, "Sets sort mode to use").
 		Add("help", &showHelp, false, "Prints the help").
 		Scan([]string{})
 	if showHelp {
 		fm.Help()
 	}
 
-	if len(os.Args) == 1 {
+	if len(os.Args) == 0 {
 		os.Args = append(os.Args, ".")
 	}
 
 	config.ColorMode = !monochrome
+	lower := strings.ToLower
 
-	for _, path := range os.Args[1:] {
+	for _, path := range os.Args {
 		pathAbs, maxLenUID, maxLenGID, totalSize, directories, files := getContents(path)
 
 		if sortBy != SORT_NAME {
@@ -65,19 +68,19 @@ func main() {
 				d2 := directories[j]
 				switch sortBy {
 				case SORT_NAME_DESC:
-					return strings.ToLower(d1.Path()) > strings.ToLower(d2.Path())
+					return lower(d1.Path()) > lower(d2.Path())
 				case SORT_PERM:
 					return d1.Permissions().Uint() < d2.Permissions().Uint()
 				case SORT_PERM_DESC:
 					return d1.Permissions().Uint() > d2.Permissions().Uint()
 				case SORT_USER:
-					return strings.ToLower(d1.Owner()) < strings.ToLower(d2.Owner())
+					return lower(d1.Owner()) < lower(d2.Owner())
 				case SORT_USER_DESC:
-					return strings.ToLower(d1.Owner()) > strings.ToLower(d2.Owner())
+					return lower(d1.Owner()) > lower(d2.Owner())
 				case SORT_GROUP:
-					return strings.ToLower(d1.Group()) < strings.ToLower(d2.Group())
+					return lower(d1.Group()) < lower(d2.Group())
 				case SORT_GROUP_DESC:
-					return strings.ToLower(d1.Group()) > strings.ToLower(d2.Group())
+					return lower(d1.Group()) > lower(d2.Group())
 				case SORT_SIZE:
 					return d1.Size() < d2.Size()
 				case SORT_SIZE_DESC:
@@ -87,26 +90,26 @@ func main() {
 				case SORT_TIME_DESC:
 					return d1.LastModified().Unix() > d2.LastModified().Unix()
 				}
-				return strings.ToLower(d1.Path()) < strings.ToLower(d2.Path())
+				return lower(d1.Path()) < lower(d2.Path())
 			})
 			sort.Slice(files, func(i, j int) bool {
 				f1 := files[i]
 				f2 := files[j]
 				switch sortBy {
 				case SORT_NAME_DESC:
-					return strings.ToLower(f1.Path()) > strings.ToLower(f2.Path())
+					return lower(f1.Path()) > lower(f2.Path())
 				case SORT_PERM:
 					return f1.Permissions().Uint() < f2.Permissions().Uint()
 				case SORT_PERM_DESC:
 					return f1.Permissions().Uint() > f2.Permissions().Uint()
 				case SORT_USER:
-					return strings.ToLower(f1.Owner()) < strings.ToLower(f2.Owner())
+					return lower(f1.Owner()) < lower(f2.Owner())
 				case SORT_USER_DESC:
-					return strings.ToLower(f1.Owner()) > strings.ToLower(f2.Owner())
+					return lower(f1.Owner()) > lower(f2.Owner())
 				case SORT_GROUP:
-					return strings.ToLower(f1.Group()) < strings.ToLower(f2.Group())
+					return lower(f1.Group()) < lower(f2.Group())
 				case SORT_GROUP_DESC:
-					return strings.ToLower(f1.Group()) > strings.ToLower(f2.Group())
+					return lower(f1.Group()) > lower(f2.Group())
 				case SORT_SIZE:
 					return f1.Size() < f2.Size()
 				case SORT_SIZE_DESC:
@@ -116,7 +119,7 @@ func main() {
 				case SORT_TIME_DESC:
 					return f1.LastModified().Unix() > f2.LastModified().Unix()
 				}
-				return strings.ToLower(f1.Path()) < strings.ToLower(f2.Path())
+				return lower(f1.Path()) < lower(f2.Path())
 			})
 		}
 
